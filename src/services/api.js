@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const basicsRouter = require('../modules/basics/router');
-const list = require('../modules/products/service/listProduit'); 
+const list = require('../modules/products/router'); 
 
 const router = new Router();
 
