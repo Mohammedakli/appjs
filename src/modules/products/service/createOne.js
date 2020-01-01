@@ -4,9 +4,12 @@ const fs = require('fs');
 
 module.exports =  (req, res) => {
   let rawdata = fs.readFileSync('src/modules/products/service/Products.json');
+  console.log(rawdata)
   let db = JSON.parse(rawdata);
+  
   db.push(req.body)
-  fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(db))
+  console.log(db)
+  fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(db, null, 2))
   res.send({
     status : 200,
     message : 'success'
