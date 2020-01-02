@@ -2,17 +2,15 @@ const fs = require('fs');
 
 
 module.exports =  (req, res) => {
-    console.log(req.params["id"])
-  let rawdata = fs.readFileSync('src/modules/products/service/Products.json');
-  const userId = req.params["id"] ;
-    JSON.parse(req.body.rawdata)
-  delete rawdata[userId];
-  
-  fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(rawdata, null, 2))
+  let data = fs.readFileSync('src/modules/products/service/Products.json');
+  let Products = JSON.parse(data);
+  Products = Products.filter((Element) => Element._id!==Number(req.params["id"]))
+  console.log(Products)
+  fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(Products))
   res.send({
     status : 200,
     message : 'success',
-    data : rawdata
+    data : Products
   })
    
 
