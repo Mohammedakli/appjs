@@ -1,6 +1,7 @@
 const fs = require('fs')
-//const _ = require("lodash")
+
 module.exports = (req, res) => {
+  console.log(req.body); 
     let data = fs.readFileSync('src/modules/products/service/Products.json');
     let Products = JSON.parse(data);
     let indexOfProduct = Products.map((Element) => Element._id).indexOf(Number(req.params["id"]))
@@ -8,10 +9,10 @@ module.exports = (req, res) => {
     
     Products[indexOfProduct] = {
         ...Products[indexOfProduct],
-        ...req.body
+        ...req.body.user
     }
     
-    fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(Products))
+    fs.writeFileSync('src/modules/products/service/Products.json', JSON.stringify(Products,null,2))
   return res.json(Products)
 
 }
